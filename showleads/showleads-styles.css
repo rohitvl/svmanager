@@ -1,0 +1,92 @@
+.leads-container {
+    width: 100vw;
+    margin: 0 auto;
+}
+
+/*leads table styling starts*/
+
+#leads thead {
+    background-color: lightcoral;
+    color: whitesmoke;
+    font-size: 0.8em;
+    text-align: center;
+}
+
+#leads tbody {
+    font-size: 0.65em;
+}
+
+#leads tbody tr {
+    cursor: pointer;
+    text-align: left;
+}
+
+#leads tbody tr:nth-child(even) {
+    background-color: #eee;
+}
+
+#leads tbody tr:nth-child(odd) {
+    background-color: #fff;
+}
+
+#leads_info {
+    display: none;
+}
+
+#leads_paginate {
+    font-size: 0.6em;
+}
+
+#leads_filter {
+    text-align: left;
+    font-size: 0.7em;
+    font-weight: bolder;
+}
+
+/*leads table styling ends*/
+
+
+/*lead info modal styling*/
+
+.leadInfo {
+    padding: 10px;
+    width: 95%;
+    height: 95%;
+    overflow-y: auto;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: whitesmoke;
+    /* display: none; */
+}
+
+.top-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.name-on-modal {
+    font-size: 0.7em;
+}
+
+.close-modal {
+    font-size: 1.5em;
+    color: crimson;
+}
+
+.leadInfo small {
+    color: cadetblue;
+    font-weight: bolder;
+}
+
+.leadInfo input, .leadInfo select {
+    border: 1px solid cadetblue;
+    width: 100%;
+    margin-bottom: 8px;
+    background-color: whitesmoke;
+    padding: 3px 2px;
+}
+
+/*lead info modal styling*/

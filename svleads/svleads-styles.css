@@ -1,0 +1,73 @@
+.svleads-container form {
+    width: 320px;
+    margin: 0 auto;
+    box-shadow: 1px 1px 5px #aaa;
+}
+
+.svleads-container form .div-nondd input {
+    width: 100%;
+    padding: 5px 5px;
+    margin: 8px 0 0 0;
+    border: 0;
+    border-bottom: 1px solid cadetblue;
+    transition: 200ms;
+}
+
+.svleads-container form .div-nondd input[type="submit"] {
+    background-color: cadetblue;
+    color: wheat;
+    font-size: 1.25em;
+}
+
+.svleads-container form .div-nondd input[type="submit"]:active {
+    color: cadetblue;
+    background-color: wheat;
+}
+
+.svleads-container form .div-nondd:not(:last-child) {
+    position: relative;
+    padding: 8px 0;
+}
+
+.svleads-container form .div-nondd label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #aaa;
+    pointer-events: none;
+    transition: 500ms;
+}
+
+.div-dd {
+    background-color: whitesmoke;
+    padding: 10px 5px;
+    box-shadow: 1px 1px 5px #bbb;
+}
+
+.div-dd p label {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0;
+    padding: 8px 0;
+}
+
+.div-dd span {
+    color: cadetblue;
+    font-weight: bolder;
+    letter-spacing: 1px;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                        supported by Chrome, Opera and Firefox */
+}
+
+.div-dd input[type="checkbox"] {
+    height: 20px;
+    width: 20px;
+}
