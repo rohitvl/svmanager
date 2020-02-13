@@ -1,24 +1,15 @@
 <?php
 
-echo '
+include '../Connection/connectionPDO.php';
 
-{
-    "data": [
-      {
-        "name": "Nixon Architecture for de Franco",
-        "number": "7506605530",
-        "status": "Pre-WR",
-        "token": "320800"
-      },
-      {
-        "name": "Rohit Lad",
-        "number": "7506605530",
-        "status": "Post-WR",
-        "token": "320810"
-      }
-    ]
-}
+$statement = $pdo->prepare("select * from leads ORDER BY lead_id DESC");
+$statement->execute();
+$results = $statement->fetchAll(PDO::FETCH_ASSOC);
+$json = json_encode($results);
 
-';
+echo '{
+  "data": ';
+echo $json;
+echo "}";
 
 ?>

@@ -1,9 +1,14 @@
 .leads-container {
     width: 100vw;
+    overflow-x: hidden;
     margin: 0 auto;
 }
 
 /*leads table styling starts*/
+
+#leads {
+    overflow-x: scroll;
+}
 
 #leads thead {
     background-color: lightcoral;
@@ -12,13 +17,21 @@
     text-align: center;
 }
 
+#leads thead tr th {
+    border: 1px solid #aaa;
+}
+
 #leads tbody {
     font-size: 0.65em;
 }
 
 #leads tbody tr {
     cursor: pointer;
-    text-align: left;
+    text-align: center;
+}
+
+#leads tbody tr td {
+    border: 1px solid antiquewhite;
 }
 
 #leads tbody tr:nth-child(even) {
@@ -38,9 +51,27 @@
 }
 
 #leads_filter {
-    text-align: left;
+    text-align: center;
     font-size: 0.7em;
     font-weight: bolder;
+    color: cadetblue;
+}
+
+.hideth {
+    display: none;
+}
+
+#leads tbody tr td:nth-child(5), 
+#leads tbody tr td:nth-child(6), 
+#leads tbody tr td:nth-child(7), 
+#leads tbody tr td:nth-child(8), 
+#leads tbody tr td:nth-child(9), 
+#leads tbody tr td:nth-child(10), 
+#leads tbody tr td:nth-child(11), 
+#leads tbody tr td:nth-child(12), 
+#leads tbody tr td:nth-child(13),
+#leads tbody tr td:nth-child(14) {
+    display: none;
 }
 
 /*leads table styling ends*/
@@ -52,13 +83,13 @@
     padding: 10px;
     width: 95%;
     height: 95%;
-    overflow-y: auto;
+    overflow-y: scroll;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: whitesmoke;
-    /* display: none; */
+    display: none;
 }
 
 .top-info {
@@ -81,12 +112,51 @@
     font-weight: bolder;
 }
 
-.leadInfo input, .leadInfo select {
+.leadInfo input[type="text"], input[type="tel"], .leadInfo select, textarea {
     border: 1px solid cadetblue;
     width: 100%;
     margin-bottom: 8px;
     background-color: whitesmoke;
     padding: 3px 2px;
+}
+
+.checkbox-container {
+    padding: 16px 0;
+}
+
+.checkbox-container label {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+}
+
+.checkbox-container p {
+    width: 100%;
+    margin: 0;
+}
+
+.checkbox-container input {
+    margin: 0;
+}
+
+
+.leadInfo button {
+    width: 80%;
+    background-color: cadetblue;
+    color: wheat;
+    border: 1px solid wheat;
+    padding: 8px 4px;
+}
+
+.leadInfo #restore {
+    background-color: crimson;
+    color: wheat;
+}
+
+.feedback {
+    font-size: 0.7em;
 }
 
 /*lead info modal styling*/

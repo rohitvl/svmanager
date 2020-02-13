@@ -67,7 +67,7 @@
                         supported by Chrome, Opera and Firefox */
 }
 
-.div-dd input[type="checkbox"] {
+.div-dd input[type="radio"] {
     height: 20px;
     width: 20px;
 }

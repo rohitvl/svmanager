@@ -55,7 +55,7 @@ $('.svleads-container').mouseup(function(e)
 
         container.hide();
 
-        $(`.div-dd input:checkbox[name="config"]:checked`).each(function(){
+        $(`.div-dd input:radio[name="config"]:checked`).each(function(){
             arr.push($(this).val());
         });
 

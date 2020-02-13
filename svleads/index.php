@@ -13,18 +13,28 @@ function secure($value) {
     $name = secure($_POST['lname']);
     $number = secure($_POST['lnumber']);
     $configuration = secure($_POST['lconfig']);
-    $svdt = secure($_POST['ldt']);
+    $getsvdt = secure($_POST['ldt']);
+    $svdt = substr($getsvdt,6,4) . "-" . substr($getsvdt,3,2) . "-" . substr($getsvdt,0,2) . " " . substr($getsvdt,11);
 
     $feedback = "";
 
-    // echo $name . " " . $number . " " . $configuration . " " . $svdt;
+    $sqlExist = "SELECT * FROM leads WHERE lead_number = '$number'";
+    $result_sqlExist = $conn->query($sqlExist);
 
-    $sql = "INSERT INTO leads (lead_name, lead_number, lead_config, lead_svd) VALUES ('$name', '$number', '$configuration', '$svdt')";
+    if ($result_sqlExist->num_rows == 0) {
 
-    if ($conn->query($sql) === TRUE) {
-        $feedback = "Lead Added Successfully";
+        $sql = "INSERT INTO leads (lead_name, lead_number, lead_config, lead_svd) VALUES ('$name', '$number', '$configuration', '$svdt')";
+
+        if ($conn->query($sql) === TRUE) {
+            $feedback = "Lead Added Successfully";
+        } else {
+            $feedback = "Error: " . $sql . "<br>" . $conn->error;
+        }
+
     } else {
-        $feedback = "Error: " . $sql . "<br>" . $conn->error;
+
+        $feedback = "Lead Already Exist";
+
     }
 
  }
@@ -86,8 +96,8 @@ function secure($value) {
             </div>
 
             <div class="text-left div-dd">
-                <p class="m-0"><label for="1bhk"><input type="checkbox" name="config" value="1 BHK" id="1bhk"><span>&nbsp;&nbsp;1BHK</span></label></p>
-                <p class="m-0"><label for="jodi1bhk"><input type="checkbox" name="config" value="Jodi 1 BHK" id="jodi1bhk"><span>&nbsp;&nbsp;Jodi 1BHK</span></label></p>
+                <p class="m-0"><label for="1bhk"><input type="radio" name="config" value="1 BHK" id="1bhk"><span>&nbsp;&nbsp;1BHK</span></label></p>
+                <p class="m-0"><label for="jodi1bhk"><input type="radio" name="config" value="Jodi 1 BHK" id="jodi1bhk"><span>&nbsp;&nbsp;Jodi 1BHK</span></label></p>
             </div>
 
             <div class="div-nondd">
