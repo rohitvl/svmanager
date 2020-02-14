@@ -37,31 +37,80 @@ $('#ldt').datetimepicker({
 //first hide the dd container
 $(".div-dd").hide();
 
-//show when clicked/focused on config input
+//show when clicked/focused on config/sourceby input
 $("#lconfig").focus(function(){
-    $(".div-dd").show();
+    $(".div-dd-config").show();
+});
+
+$("#lnemp").focus(function(){
+    $(".div-dd-source").show();
+});
+
+$("#lsvs").focus(function(){
+    $(".div-dd-svs").show();
 });
   
 
 $('.svleads-container').mouseup(function(e) 
 {
-    let container = $(".div-dd");
-    let inputContainer = $('#lconfig');
+    let configcontainer = $(".div-dd-config");
+    let configinputContainer = $('#lconfig');
 
-    let arr = [];
+    let carr = [];
 
     // if the target of the click isn't the container nor a descendant of the container
-    if (!container.is(e.target) && container.has(e.target).length === 0 && !inputContainer.is(e.target)) {
+    if (!configcontainer.is(e.target) && configcontainer.has(e.target).length === 0 && !configinputContainer.is(e.target)) {
 
-        container.hide();
+        configcontainer.hide();
 
-        $(`.div-dd input:radio[name="config"]:checked`).each(function(){
-            arr.push($(this).val());
+        $(`.div-dd-config input:radio[name="config"]:checked`).each(function(){
+            carr.push($(this).val());
         });
 
-        inputContainer.val(arr);
+        configinputContainer.val(carr);
 
         labelDown('lconfig');
+
+    }
+
+    let sourcecontainer = $(".div-dd-source");
+    let sourceinputContainer = $('#lnemp');
+
+    let sarr = [];
+
+    // if the target of the click isn't the container nor a descendant of the container
+    if (!sourcecontainer.is(e.target) && sourcecontainer.has(e.target).length === 0 && !sourceinputContainer.is(e.target)) {
+
+        sourcecontainer.hide();
+
+        $(`.div-dd-source input:radio[name="ddlnemp"]:checked`).each(function(){
+            sarr.push($(this).val());
+        });
+
+        sourceinputContainer.val(sarr);
+
+        labelDown('lnemp');
+
+    }
+
+
+    let svscontainer = $(".div-dd-svs");
+    let svsinputContainer = $('#lsvs');
+
+    let svsarr = [];
+
+    // if the target of the click isn't the container nor a descendant of the container
+    if (!svscontainer.is(e.target) && svscontainer.has(e.target).length === 0 && !svsinputContainer.is(e.target)) {
+
+        svscontainer.hide();
+
+        $(`.div-dd-svs input:radio[name="svsdd"]:checked`).each(function(){
+            svsarr.push($(this).val());
+        });
+
+        svsinputContainer.val(svsarr);
+
+        labelDown('lsvs');
 
     }
 

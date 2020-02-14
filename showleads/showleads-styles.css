@@ -1,3 +1,15 @@
+.overview-info {
+    padding: 5px;
+}
+
+.overview-info span {
+    color: cadetblue;
+    font-weight: bolder;
+    letter-spacing: 1px;
+    text-decoration: underline;
+    font-size: 1.1em;
+}
+
 .leads-container {
     width: 100vw;
     overflow-x: hidden;
@@ -70,7 +82,8 @@
 #leads tbody tr td:nth-child(11), 
 #leads tbody tr td:nth-child(12), 
 #leads tbody tr td:nth-child(13),
-#leads tbody tr td:nth-child(14) {
+#leads tbody tr td:nth-child(14),
+#leads tbody tr td:nth-child(15) {
     display: none;
 }
 

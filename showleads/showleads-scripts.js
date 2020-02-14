@@ -20,8 +20,26 @@ $('#leads').DataTable( {
         { "data": "sv_done" },
         { "data": "visit_result" },
         { "data": "lead_remarks" },
+        { "data": "lead_source_by" },
         { "data": "lead_id" }
     ],
+
+    // "columnDefs": [
+    //     {
+    //         "targets": 0,
+    //         "createdCell": function (td, cellData, rowData, row, col) {
+    //             if (cellData == "pedro jonas") {
+    //                 $(tr).css({'color': '#fff', 'background-color': '#4CAF50'});
+    //             }
+    //         }
+    //     }
+    // ],
+
+    "createdRow": function(row, data, dataIndex) {
+        if (data["sv_status"] == "RSV") {
+          $(row).css("background-color", "#c8e6c9");
+        }
+    },
 
     rowId: function(a) {
         return "lead_" + a.lead_id;
@@ -72,6 +90,7 @@ $('#leads tbody').on('click', 'tr', function() {
     let svdone = $(`#${rowID}`).children().eq(10).text();
     let visitresult = $(`#${rowID}`).children().eq(11).text();
     let remarks = $(`#${rowID}`).children().eq(12).text();
+    let sourcedby = $(`#${rowID}`).children().eq(13).text();
 
     //pushing the fetched data
 
@@ -116,11 +135,14 @@ $('#leads tbody').on('click', 'tr', function() {
     //remarks
     $("#lremarks").val(remarks);
 
+    //sourced by
+    $("#lsourceby").val(sourcedby);
+
     //appropriate functions to be called in order to have proper visible elements
     lstatusflip(leadstatus);
-    whoClosing(closewho);
     attendFlip(attended);
     checksvdone('issvdone');
+    vrselected(visitresult);
 
     $('.leadInfo').show();
 });
@@ -138,35 +160,33 @@ $('.close-modal i').click(function() {
 
 //hide the selected modal elements on load of the page
 
-$('.modal-token-container, .modal-closing-container, .modal-svdonecheck-container, .modal-visitresult-container, .modal-closing-names-container').hide();
+$('.modal-token-container, .modal-closing-container, .modal-svdonecheck-container, .modal-visitresult-container').hide();
 
 //on change of lead status if it is anything except arrived, then show the token element
 //on change of lead status to Closing, then show the closing input select elements
 function lstatusflip(value) {
+
+    value === "" ? value = "Arrived" : null;
+
     value !== "Arrived" ? $('.modal-token-container').show() : (
         
         $('.modal-token-container').hide(),
         $('#token-input').val('')
-    )
+    );
 
-    value === "Closing" ? $('.modal-closing-container').show() : (
+    value === "Not Arrived" ? (
+        $('.modal-token-container').hide(),
+        $('#token-input').val('')
+    ) : null;
+
+    (value === "Closing" || value === "Booked") ? $('.modal-closing-container').show() : (
         
         $('.modal-closing-container').hide(),
-        $("#whoClosing").val(""),
-        $("#closingName").val("")
-    )
+        $('#whoClosing').val(''),
+        $('#closingName').val('')
+    );
 }
 
-//on change of whoClosing , if raunak managers then show their name, else show livnest names
-function whoClosing(value) {
-    value === "RM" || value === "LM" ? ( 
-        $('.modal-closing-names-container').show()
-    )
-     : (
-        $("#closingName").val(""),
-        $('.modal-closing-names-container').hide()
-    )
-}
 
 //if attended, then show the is sv done and visit result elements, else hide it
 function attendFlip(value) {
@@ -183,6 +203,18 @@ function checksvdone(element) {
         $('.modal-visitresult-container').hide(),
         $("#visitresult").val("")
     )
+}
+
+//on changing the visit result, also select the appropriate value in the lead status
+function vrselected(value) {
+    $('#lstatus').val(value);
+    if(value === "Booked") {
+        lstatusflip('Booked');
+    } else if (value === "Planned RSV") {
+        lstatusflip('Planned RSV');
+    } else {
+        null;
+    }
 }
 
 $('#issvdone').on('click', function() {
@@ -225,8 +257,8 @@ $('#save').on('click', function() {
     // alert(`${sname} ${snumber} ${sleadstatus} ${stoken}  ${sconfig} ${ssvdate} `);
     // alert(`${ssvstatus} ${sclosewho} ${sclosename} ${sattended}  ${ssvdone} ${svisitresult} `);
 
-    if(sname === "" || snumber === "" || sremarks === "") {
-        $('.feedback').text('**please enter required fields like remarks / name / number**');
+    if(sname === "" || snumber === "" || sremarks === "" || sleadstatus === "" || ssvstatus === "" || ((sleadstatus === "Tagged" || sleadstatus === "Pre WR" || sleadstatus === "AV" || sleadstatus === "Post WR" || sleadstatus === "Closing" || sleadstatus === "Booked" || sleadstatus === "Planned RSV") && stoken === "")) {
+        $('.feedback').text('**please enter required fields like remarks / change status / token number**');
     } else {
 
         $.ajax({

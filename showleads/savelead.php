@@ -24,6 +24,8 @@ isset($_POST['attended']) && isset($_POST['svdone']) && isset($_POST['visitresul
 
         $sqlUpdate = "UPDATE `leads` SET `lead_name`='$name',`lead_number`='$number',`lead_config`='$config',`lead_svd`='$svdate',`sv_status`='$svstatus',`lead_status`='$leadstatus',`lead_token`='$token',`closing_who`='$closewho',`closing_name`='$closename',`attend_status`='$attended',`sv_done`='$svdone',`visit_result`='$visitresult',`lead_remarks`='$remarks' WHERE `lead_id`='$id'";
 
+        // echo $sqlUpdate;
+
         if ($conn->query($sqlUpdate) === TRUE) {
             echo "**Lead updated successfully**";
         } else {

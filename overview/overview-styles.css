@@ -1,0 +1,26 @@
+.overview-container {
+    overflow-x: hidden;
+}
+
+.overview-container h6 {
+    background-color: transparent;
+    color: cadetblue;
+}
+
+.overview-container .col-8 {
+    padding: 12px 0;
+    background-color: #fff;
+    border-bottom: 1px solid cadetblue;
+    border-top: 1px solid cadetblue;
+}
+
+.overview-container .col-4 {
+    padding: 12px 0;
+    font-size: 1.25em;
+    background-color: wheat;
+    color: cadetblue;
+    font-weight: bolder;
+    border-bottom: 1px solid cadetblue;
+    border-top: 1px solid cadetblue;
+    border-left: 1px solid cadetblue;
+}
