@@ -21,19 +21,15 @@ $('#leads').DataTable( {
         { "data": "visit_result" },
         { "data": "lead_remarks" },
         { "data": "lead_source_by" },
+        { "data": "closing_other" },
         { "data": "lead_id" }
     ],
 
-    // "columnDefs": [
-    //     {
-    //         "targets": 0,
-    //         "createdCell": function (td, cellData, rowData, row, col) {
-    //             if (cellData == "pedro jonas") {
-    //                 $(tr).css({'color': '#fff', 'background-color': '#4CAF50'});
-    //             }
-    //         }
-    //     }
-    // ],
+    "pageLength": 14,
+
+    "language": {
+        "search": "Quickly Filter The Leads:"
+    },
 
     "createdRow": function(row, data, dataIndex) {
         if (data["sv_status"] == "RSV") {
@@ -91,6 +87,7 @@ $('#leads tbody').on('click', 'tr', function() {
     let visitresult = $(`#${rowID}`).children().eq(11).text();
     let remarks = $(`#${rowID}`).children().eq(12).text();
     let sourcedby = $(`#${rowID}`).children().eq(13).text();
+    let otherclose = $(`#${rowID}`).children().eq(14).text();
 
     //pushing the fetched data
 
@@ -123,6 +120,9 @@ $('#leads tbody').on('click', 'tr', function() {
     //close name
     $("#closingName").val(closename);
 
+    //other closing
+    $("#otherrm").val(otherclose);
+
     //attend status
     $("#attendStatus").val(attended);
 
@@ -139,6 +139,7 @@ $('#leads tbody').on('click', 'tr', function() {
     $("#lsourceby").val(sourcedby);
 
     //appropriate functions to be called in order to have proper visible elements
+    rmassigned(closename);
     lstatusflip(leadstatus);
     attendFlip(attended);
     checksvdone('issvdone');
@@ -160,7 +161,7 @@ $('.close-modal i').click(function() {
 
 //hide the selected modal elements on load of the page
 
-$('.modal-token-container, .modal-closing-container, .modal-svdonecheck-container, .modal-visitresult-container').hide();
+$('.modal-token-container, .modal-closing-container, .modal-svdonecheck-container, .modal-visitresult-container, #otherrm').hide();
 
 //on change of lead status if it is anything except arrived, then show the token element
 //on change of lead status to Closing, then show the closing input select elements
@@ -174,17 +175,22 @@ function lstatusflip(value) {
         $('#token-input').val('')
     );
 
+
     value === "Not Arrived" ? (
         $('.modal-token-container').hide(),
         $('#token-input').val('')
     ) : null;
 
-    (value === "Closing" || value === "Booked") ? $('.modal-closing-container').show() : (
+
+    (value === "Closing" || value === "Booked" || value === "Planned RSV") ? $('.modal-closing-container').show() : (
         
+        $('#otherrm').hide(),
+        $('#otherrm').val(''),
         $('.modal-closing-container').hide(),
         $('#whoClosing').val(''),
         $('#closingName').val('')
     );
+
 }
 
 
@@ -207,14 +213,24 @@ function checksvdone(element) {
 
 //on changing the visit result, also select the appropriate value in the lead status
 function vrselected(value) {
-    $('#lstatus').val(value);
     if(value === "Booked") {
+        $('#lstatus').val(value);
         lstatusflip('Booked');
     } else if (value === "Planned RSV") {
+        $('#lstatus').val(value);
         lstatusflip('Planned RSV');
     } else {
         null;
     }
+}
+
+
+// on selecting the rm other option, show the textbox
+function rmassigned(value) {
+    value === "Other" ? $('#otherrm').show() : (
+        $('#otherrm').val(''),
+        $('#otherrm').hide()
+    )
 }
 
 $('#issvdone').on('click', function() {
@@ -237,6 +253,7 @@ $('#save').on('click', function() {
     let ssvstatus = $('#lsvstatus').val();
     let sclosewho = $('#whoClosing').val();
     let sclosename = $('#closingName').val();
+    let sotherclosename = $('#otherrm').val();
     let sattended = $('#attendStatus').val();
 
     let ssvdone = null;
@@ -274,6 +291,7 @@ $('#save').on('click', function() {
                 svstatus: ssvstatus,
                 closewho: sclosewho,
                 closename: sclosename,
+                otherclose: sotherclosename,
                 attended: sattended,
                 svdone: ssvdone,
                 visitresult: svisitresult,
@@ -289,4 +307,26 @@ $('#save').on('click', function() {
 
     }
 
+});
+
+
+//click pills to filter the table
+$('#sv-pill').click(function() {
+    $('#leads').DataTable().ajax.url(`filters/sv.php`).load();
+});
+
+$('#rsv-pill').click(function() {
+    $('#leads').DataTable().ajax.url(`filters/rsv.php`).load();
+});
+
+$('#arrived-pill').click(function() {
+    $('#leads').DataTable().ajax.url(`filters/arrived.php`).load();
+});
+
+$('#pending-pill').click(function() {
+    $('#leads').DataTable().ajax.url(`filters/pending.php`).load();
+});
+
+$('#tagged-pill').click(function() {
+    $('#leads').DataTable().ajax.url(`filters/tagged.php`).load();
 });

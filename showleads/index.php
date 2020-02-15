@@ -2,6 +2,15 @@
 
 include '../Connection/connection.php';
 
+// Start the session
+session_start();
+
+
+if(isset($_SESSION['username'])) {
+} else {
+    echo "<script type='text/javascript'> window.location.href = '../index.php'; </script>";
+}
+
 ?>
 
 <html lang="en">
@@ -48,76 +57,19 @@ include '../Connection/connection.php';
     </div>
 
     <div class="container-fluid leads-container p-0">
-        <!-- <p class="overview-info m-0">
-            <small> -->
 
-                <?php
-
-                    // $sqlOverview = "SELECT lead_svd, sv_status, lead_status, attend_status, sv_done from leads WHERE (lead_svd BETWEEN '2020-02-14 00:00:00' AND '2020-02-14 23:59:00')";
-                    // $result = $conn->query($sqlOverview);
-
-                    // $total = $totalArr = $pending = $svdone = $rsvdone = $attended = $unattended = $tagged = $booked = 0;
-
-                    // if ($result->num_rows > 0) {
-                    //     // output data of each row
-                    //     while($row = $result->fetch_assoc()) {
-
-                    //         $svstatus = $row['sv_status'];
-                    //         $leadstatus = $row['lead_status'];
-                    //         $attendstatus = $row['attend_status'];
-                    //         $leadsvdone = $row['sv_done'];
-
-                    //         $total++;
-
-                    //         if($leadstatus !== "Not Arrived") {
-                    //             if($leadstatus !== "") {
-
-                    //                 $totalArr++;
-
-                    //                 if($leadsvdone === "Yes") {
-                    //                     if($svstatus === "SV") {
-                    //                         $svdone++;
-                    //                     } else if ($svstatus === "RSV") {
-                    //                         $rsvdone++;
-                    //                     } else {
-
-                    //                     }
-                    //                 }
-                                    
-                    //                 if($attendstatus === "Attended") {
-                    //                     $attended++;
-                    //                 } else if ($attendstatus === "Unattended") {
-                    //                     $unattended++;
-                    //                 } else {
-
-                    //                 }
-
-                    //                 if($leadstatus !== "Arrived") {
-                    //                     $tagged++;
-                    //                 }
-
-                    //                 if($leadstatus === "Booked") {
-                    //                     $booked++;
-                    //                 }
-
-                    //             }
-
-                    //         }
-
-
-                    //     }
-                    // } else {
-                    // }
-
-                    // echo '
-                    //     Total : <span>' . $total . '</span>, Total Arrived: <span>' . $totalArr . '</span>, Pending: <span>' . ($total - $totalArr) . '</span>, SV Done: <span>' . $svdone . '</span>, RSV Done: <span>' . $rsvdone . '</span>, Attended: <span>' . $attended . '</span>, Unattended: <span>' . $unattended . '</span>, Tagged: <span>' . $tagged . '</span>, Booked: <span>' . $booked . '</span>
-                    // ';
-
-                ?>
-
-                <!-- Total : <span>10</span>, Total Arrived: <span>9</span>, Pending: <span>1</span>, SV Done: <span>7</span>, RSV Done: <span>2</span>, Tagged: <span>8</span>, Booked: <span>2</span> -->
-            <!-- </small>
-        </p> -->
+        <div class="filter-pills">
+            <span>Today's Filter: </span>
+            <span style="background-color: #880e4f;" id="sv-pill">SV</span>
+            <span style="background-color: #b71c1c;" id="rsv-pill">RSV</span>
+            <span style="background-color: #4a148c;" id="arrived-pill">Arrived</span>
+            <span style="background-color: #0d47a1;" id="pending-pill">Pending</span>
+            <span style="background-color: #004d40;" id="tagged-pill">Tagged</span>
+            <span style="background-color: #1b5e20;" id="av-pill">AV</span>
+            <span style="background-color: #ff6f00;" id="closing-pill">Closing</span>
+            <span style="background-color: #3e2723;" id="booked-pill">Booked</span>
+            <span style="background-color: #880e4f;" id="rsvp-pill">RSV Planned</span>
+        </div>
 
         <table id="leads" class="display" style="width:100%">
             <thead>
@@ -137,6 +89,7 @@ include '../Connection/connection.php';
                     <th class="hideth">Visit Result</th>
                     <th class="hideth">Remarks</th>
                     <th class="hideth">Sourced By</th>
+                    <th class="hideth">Closing Other</th>
                     <th class="hideth">ID</th>
                 </tr>
             </thead>
@@ -204,7 +157,9 @@ include '../Connection/connection.php';
             </div>
 
             <div class="modal-closing-container">
-                <small>Closing Managers Assigned :</small><br />
+                <p class="text-center"><small>Closing Managers Assigned :</small></p>
+
+                <small>Livnest Managers Assigned :</small><br />
                 <select id="whoClosing">
                     <option value="" hidden selected>--LN Managers--</option>
                     <option value="Vikas Tripathi">Vikas Tripathi</option>
@@ -217,11 +172,12 @@ include '../Connection/connection.php';
                 </select>
 
                 <!-- <div class="modal-closing-names-container"> -->
-                <select id="closingName">
+                <small>Raunak Managers Assigned :</small><br />
+                <select id="closingName" onchange="rmassigned(this.value)">
                     <option value="" hidden selected>--Raunak Managers--</option>
                     <?php
 
-                        $sqlremp = "SELECT * FROM raunak_managers";
+                        $sqlremp = "SELECT * FROM raunak_managers ORDER BY remp_name ASC";
                         $result = $conn->query($sqlremp);
 
                         if ($result->num_rows > 0) {
@@ -236,7 +192,10 @@ include '../Connection/connection.php';
 
                         }
                     ?>
+                    <option value="Other">Other</option>
                 </select>
+
+                <input type="text" placeholder="Specify Not Listed Name" id="otherrm">
                 <!-- </div> -->
             </div>
 

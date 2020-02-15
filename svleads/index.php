@@ -2,6 +2,15 @@
 
 include '../Connection/connection.php';
 
+// Start the session
+session_start();
+
+
+if(isset($_SESSION['username'])) {
+} else {
+    echo "<script type='text/javascript'> window.location.href = '../index.php'; </script>";
+}
+
 function secure($value) {
     $value = htmlspecialchars($value);
     $value = trim($value);

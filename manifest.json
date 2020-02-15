@@ -1,7 +1,7 @@
 {
     "name": "Livnest SV",
     "short_name": "Livnest SV",
-    "start_url": "showleads/index.php",
+    "start_url": "index.php",
     "display": "standalone",
     "background_color": "#5f9ea0",
     "theme_color": "#395e60",

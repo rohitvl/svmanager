@@ -16,10 +16,25 @@
     margin: 0 auto;
 }
 
+.filter-pills {
+    font-size: 0.6em;
+    padding: 4px 8px;
+}
+
+.filter-pills span:not(:first-child) {
+    display: inline-block;
+    background-color: cadetblue;
+    color: #fff;
+    padding: 2px 8px;
+    margin: 2px 4px;
+    border-radius: 12px;
+}
+
 /*leads table styling starts*/
 
 #leads {
     overflow-x: scroll;
+    height: calc(100% - 200px);
 }
 
 #leads thead {
@@ -83,7 +98,8 @@
 #leads tbody tr td:nth-child(12), 
 #leads tbody tr td:nth-child(13),
 #leads tbody tr td:nth-child(14),
-#leads tbody tr td:nth-child(15) {
+#leads tbody tr td:nth-child(15),
+#leads tbody tr td:nth-child(16) {
     display: none;
 }
 

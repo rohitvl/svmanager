@@ -29,3 +29,67 @@ input:focus, textarea:focus, select:focus {
     background-color: cadetblue;
     color: #fff;
 }
+
+
+/*login page styling*/
+
+.Login-Container {
+    height: 100vh;
+    width: 100vw;
+    background-color: rgb(38,87,125);
+}
+
+.Login {
+    width: 320px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 5px;
+}
+
+.Login img {
+    margin: 20px;
+}
+
+.Login small {
+    color: rgb(38,87,125);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.Login div {
+    padding: 20px 0 20px;
+    position: relative;
+}
+
+.Login div label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #888;
+    font-size: 0.9em;
+    transition: 200ms;
+    pointer-events: none;
+}
+
+.Login div input {
+    padding: 5px;
+    border: 0;
+    width: 95%;
+    background-color: #fff;
+    border-bottom: 1px solid #aaa;
+    cursor: pointer;
+}
+
+.Login input[type="submit"] {
+    width: 50%;
+    background-color: rgb(38,87,125);
+    color: #fff;
+    border: 0;
+    margin: 20px;
+    padding: 10px 5px;
+}
+/*login page styling*/

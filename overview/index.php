@@ -2,7 +2,19 @@
 
 include '../Connection/connection.php';
 
-$sqlOverview = "SELECT lead_svd, sv_status, lead_status, attend_status, sv_done from leads WHERE (lead_svd BETWEEN '2020-02-14 00:00:00' AND '2020-02-14 23:59:00')";
+// Start the session
+session_start();
+
+
+if(isset($_SESSION['username'])) {
+} else {
+    echo "<script type='text/javascript'> window.location.href = '../index.php'; </script>";
+}
+
+$time1 = date('Y-m-d') . " 00:00:00";
+$time2 = date('Y-m-d') . " 23:59:59";
+
+$sqlOverview = "SELECT lead_svd, sv_status, lead_status, attend_status, sv_done from leads WHERE (lead_svd BETWEEN '$time1' AND '$time2')";
 $result = $conn->query($sqlOverview);
 
 $total = $totalArr = $pending = $svdone = $rsvdone = $unattended = $tagged = $av = $closing = $booked = 0;
