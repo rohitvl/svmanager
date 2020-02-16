@@ -45,10 +45,51 @@ $('#leads').DataTable( {
         }
     },
 
+    "columnDefs": [{
+        "targets": 5,//index of column starting from 0
+        // "data": "lead_name", this name should exist in your JSON response
+        "render": function (data) {
+            let humanDate = `${data.substring(8, 10)} ${generateMonth[data.substring(5, 7)]} ${data.substring(0, 4)} ${data.substring(11, 16)}`;
+            return humanDate;
+        }
+    }],
+
     rowId: function(a) {
         return "lead_" + a.lead_id;
     }
 } );
+
+
+//for human readable date
+let generateMonth = {
+    "01": "JAN",
+    "02": "FEB",
+    "03": "MAR",
+    "04": "APR",
+    "05": "MAY",
+    "06": "JUN",
+    "07": "JUL",
+    "08": "AUG",
+    "09": "SEPT",
+    "10": "OCT",
+    "11": "NOV",
+    "12": "DEC"
+};
+
+let reverseMonth = {
+    "JAN": "01",
+    "FEB": "02",
+    "MAR": "03",
+    "APR": "04",
+    "MAY": "05",
+    "JUN": "06",
+    "JUL": "07",
+    "AUG": "08",
+    "SEPT": "09",
+    "OCT": "10",
+    "NOV": "11",
+    "DEC": "12"
+}
 
 
 //adding jquery date time picker to the appropriate input
@@ -86,7 +127,7 @@ $('#leads tbody').on('click', 'tr', function() {
 
     let config = $(`#${rowID}`).children().eq(4).text();
     let svdate = $(`#${rowID}`).children().eq(5).text();
-    svdate = svdate.slice(8, 10) + '/' + svdate.slice(5, 7) + '/' + svdate.slice(0, 4) + ' ' + svdate.slice(11);
+    svdate = `${svdate.substring(0, 2)}/${reverseMonth[svdate.substring(3, 6)]}/${svdate.substring(7, 11)} ${svdate.substring(12)}:00`;
     let svstatus = $(`#${rowID}`).children().eq(6).text();
     let closewho = $(`#${rowID}`).children().eq(7).text();
     let closename = $(`#${rowID}`).children().eq(8).text();

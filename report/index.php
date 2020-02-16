@@ -121,7 +121,52 @@ if ($result->num_rows > 0) {
 
         <h6>Today's Overview</h6>
 
-        <div class="row">
+        <div>
+            <table>
+                <tr>
+                    <th>Total Leads</th>
+                    <td><?php echo $total; ?></td>
+                </tr>
+                <tr>
+                    <th>Total Arrived</th>
+                    <td><?php echo $totalArr; ?></td>
+                </tr>
+                <tr>
+                    <th>Pending</th>
+                    <td><?php $pending = $total - $totalArr; echo $pending; ?></td>
+                </tr>
+                <tr>
+                    <th>SV Done</th>
+                    <td><?php echo $svdone; ?></td>
+                </tr>
+                <tr>
+                    <th>RSV Done</th>
+                    <td><?php echo $rsvdone; ?></td>
+                </tr>
+                <tr>
+                    <th>Unattended</th>
+                    <td><?php echo $unattended; ?></td>
+                </tr>
+                <tr>
+                    <th>Tagged</th>
+                    <td><?php echo $tagged; ?></td>
+                </tr>
+                <tr>
+                    <th>AV</th>
+                    <td><?php echo $av; ?></td>
+                </tr>
+                <tr>
+                    <th>Closing</th>
+                    <td><?php echo $closing; ?></td>
+                </tr>
+                <tr>
+                    <th>Booked</th>
+                    <td><?php echo $booked; ?></td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- <div class="row">
             <div class="col-8">
                 Total Leads
             </div>
@@ -209,7 +254,7 @@ if ($result->num_rows > 0) {
             <div class="col-4">
                 <?php echo $booked; ?>
             </div>
-        </div>
+        </div> -->
 
     </div>
 

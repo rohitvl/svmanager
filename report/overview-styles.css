@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Tomorrow&display=swap');
+
 .overview-container {
     overflow-x: hidden;
 }
@@ -7,20 +9,35 @@
     color: cadetblue;
 }
 
-.overview-container .col-8 {
-    padding: 12px 0;
-    background-color: #fff;
-    border-bottom: 1px solid cadetblue;
-    border-top: 1px solid cadetblue;
+
+.overview-container table {
+    width: 100%;
 }
 
-.overview-container .col-4 {
-    padding: 12px 0;
-    font-size: 1.25em;
-    background-color: wheat;
-    color: cadetblue;
+.overview-container table th {
+    width: 80%;
+    padding: 5px 16px;
+    background-color: cadetblue;
+    color: white;
+    border: 1px solid #004d40;
+}
+
+.overview-container table tr:nth-child(odd) th {
+    background-color: #01579b;
+}
+
+.overview-container table td {
+    width: 20%;
+    text-align: center;
+    padding: 5px 8px;
+    border: 1px solid #004d40;
+    background-color: #e0f2f1;
     font-weight: bolder;
-    border-bottom: 1px solid cadetblue;
-    border-top: 1px solid cadetblue;
-    border-left: 1px solid cadetblue;
+    text-shadow: 1px 1px black;
+    letter-spacing: 3px;
+    font-family: 'Tomorrow', sans-serif;
+}
+
+.overview-container table tr:nth-child(odd) td {
+    background-color: #e1f5fe;
 }
