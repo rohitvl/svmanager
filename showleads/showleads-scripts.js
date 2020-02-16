@@ -33,7 +33,15 @@ $('#leads').DataTable( {
 
     "createdRow": function(row, data, dataIndex) {
         if (data["sv_status"] == "RSV") {
-          $(row).css("background-color", "#c8e6c9");
+          $(row).css("background-color", "#ffe0b2");
+        }
+
+        if (data["lead_status"] == "Tagged") {
+          $(row).css("background-color", "#c5e1a5");
+        }
+
+        if (data["lead_status"] == "Booked") {
+          $(row).css({"background-color": "#33691e", "color": "white", "font-weight": "bolder"});
         }
     },
 
@@ -182,7 +190,7 @@ function lstatusflip(value) {
     ) : null;
 
 
-    (value === "Closing" || value === "Booked" || value === "Planned RSV") ? $('.modal-closing-container').show() : (
+    (value === "Closing" || value === "Booked" || value === "Planned RSV" || value === "Feedback Awaited" || value === "Did Not Like") ? $('.modal-closing-container').show() : (
         
         $('#otherrm').hide(),
         $('#otherrm').val(''),
@@ -219,6 +227,12 @@ function vrselected(value) {
     } else if (value === "Planned RSV") {
         $('#lstatus').val(value);
         lstatusflip('Planned RSV');
+    } else if (value === "Feedback Awaited") {
+        $('#lstatus').val(value);
+        lstatusflip('Feedback Awaited');
+    } else if (value === "Did Not Like") {
+        $('#lstatus').val(value);
+        lstatusflip('Did Not Like');
     } else {
         null;
     }
@@ -274,7 +288,7 @@ $('#save').on('click', function() {
     // alert(`${sname} ${snumber} ${sleadstatus} ${stoken}  ${sconfig} ${ssvdate} `);
     // alert(`${ssvstatus} ${sclosewho} ${sclosename} ${sattended}  ${ssvdone} ${svisitresult} `);
 
-    if(sname === "" || snumber === "" || sremarks === "" || sleadstatus === "" || ssvstatus === "" || ((sleadstatus === "Tagged" || sleadstatus === "Pre WR" || sleadstatus === "AV" || sleadstatus === "Post WR" || sleadstatus === "Closing" || sleadstatus === "Booked" || sleadstatus === "Planned RSV") && stoken === "")) {
+    if(sname === "" || snumber === "" || sremarks === "" || sleadstatus === "" || ssvstatus === "" || ((sleadstatus === "Tagged" || sleadstatus === "Pre WR" || sleadstatus === "AV" || sleadstatus === "Post WR" || sleadstatus === "Closing" || sleadstatus === "Booked" || sleadstatus === "Planned RSV" || sleadstatus === "Feedback Awaited" || sleadstatus === "Did Not Like") && stoken === "")) {
         $('.feedback').text('**please enter required fields like remarks / change status / token number**');
     } else {
 
@@ -329,4 +343,28 @@ $('#pending-pill').click(function() {
 
 $('#tagged-pill').click(function() {
     $('#leads').DataTable().ajax.url(`filters/tagged.php`).load();
+});
+
+$('#av-pill').click(function() {
+    $('#leads').DataTable().ajax.url(`filters/av.php`).load();
+});
+
+$('#closing-pill').click(function() {
+    $('#leads').DataTable().ajax.url(`filters/closing.php`).load();
+});
+
+$('#booked-pill').click(function() {
+    $('#leads').DataTable().ajax.url(`filters/booked.php`).load();
+});
+
+$('#rsvp-pill').click(function() {
+    $('#leads').DataTable().ajax.url(`filters/rsvp.php`).load();
+});
+
+$('#today-pill').click(function() {
+    $('#leads').DataTable().ajax.url(`filters/today.php`).load();
+});
+
+$('#all-pill').click(function() {
+    $('#leads').DataTable().ajax.url(`getleads.php`).load();
 });

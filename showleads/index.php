@@ -47,7 +47,7 @@ if(isset($_SESSION['username'])) {
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="../svleads"><i class="fas fa-user-plus"></i>&nbsp;Lead Enter</a>
                     <a class="dropdown-item" href=""><i class="fas fa-list"></i>&nbsp;Lead Manage</a>
-                    <a class="dropdown-item" href="../overview"><i class="fas fa-edit"></i>&nbsp;Overview</a>
+                    <a class="dropdown-item" href="../report"><i class="fas fa-edit"></i>&nbsp;Report</a>
                     <a class="dropdown-item" href="../master"><i class="fas fa-edit"></i>&nbsp;Master</a>
                     <a class="dropdown-item" href="../logout.php"><i class="fas fa-sign-out-alt"></i>&nbsp;Logout</a>
                 </div>
@@ -60,18 +60,20 @@ if(isset($_SESSION['username'])) {
 
         <div class="filter-pills">
             <span>Today's Filter: </span>
-            <span style="background-color: #880e4f;" id="sv-pill">SV</span>
-            <span style="background-color: #b71c1c;" id="rsv-pill">RSV</span>
-            <span style="background-color: #4a148c;" id="arrived-pill">Arrived</span>
-            <span style="background-color: #0d47a1;" id="pending-pill">Pending</span>
-            <span style="background-color: #004d40;" id="tagged-pill">Tagged</span>
-            <span style="background-color: #1b5e20;" id="av-pill">AV</span>
-            <span style="background-color: #ff6f00;" id="closing-pill">Closing</span>
-            <span style="background-color: #3e2723;" id="booked-pill">Booked</span>
-            <span style="background-color: #880e4f;" id="rsvp-pill">RSV Planned</span>
+            <span id="sv-pill">SV</span>
+            <span id="rsv-pill">RSV</span>
+            <span id="arrived-pill">Arrived</span>
+            <span id="pending-pill">Pending</span>
+            <span id="tagged-pill">Tagged</span>
+            <span id="av-pill">AV</span>
+            <span id="closing-pill">Closing</span>
+            <span id="booked-pill">Booked</span>
+            <span id="rsvp-pill">RSV Planned</span>
+            <span id="today-pill">Today</span>
+            <span id="all-pill">All</span>
         </div>
 
-        <table id="leads" class="display" style="width:100%">
+        <table id="leads" class="display">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -80,7 +82,7 @@ if(isset($_SESSION['username'])) {
                     <th>Token</th>
 
                     <th class="hideth">Configuration</th>
-                    <th class="hideth">SV Date</th>
+                    <th>SV Date</th>
                     <th class="hideth">SV Status</th>
                     <th class="hideth">Who Closed</th>
                     <th class="hideth">Closing Name</th>
@@ -148,6 +150,8 @@ if(isset($_SESSION['username'])) {
                     <option value="Closing">Closing Table</option>
                     <option value="Booked">Booked</option>
                     <option value="Planned RSV">Planned RSV</option>
+                    <option value="Feedback Awaited">Feedback Awaited</option>
+                    <option value="Did Not Like">Did Not Like</option>
                 </select>
             </div>
 
@@ -218,6 +222,8 @@ if(isset($_SESSION['username'])) {
                     <option value="" hidden selected>--Select Visit Result--</option>
                     <option value="Booked">Booked</option>
                     <option value="Planned RSV">Planned RSV</option>
+                    <option value="Feedback Awaited">Feedback Awaited</option>
+                    <option value="Did Not Like">Did Not Like</option>
                 </select>
             </div>
 

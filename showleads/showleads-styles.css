@@ -12,7 +12,7 @@
 
 .leads-container {
     width: 100vw;
-    overflow-x: hidden;
+    overflow-x: scroll;
     margin: 0 auto;
 }
 
@@ -46,6 +46,7 @@
 
 #leads thead tr th {
     border: 1px solid #aaa;
+    padding: 10px 0px;
 }
 
 #leads tbody {
@@ -59,6 +60,20 @@
 
 #leads tbody tr td {
     border: 1px solid antiquewhite;
+    padding: 4px 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: fit-content; 
+}
+
+#leads tbody tr td:nth-child(1),
+#leads tbody tr td:nth-child(2) {
+    text-align: left;
+}
+
+#leads tbody tr td:nth-child(3) {
+    text-align: right;
 }
 
 #leads tbody tr:nth-child(even) {
@@ -89,8 +104,8 @@
 }
 
 #leads tbody tr td:nth-child(5), 
-#leads tbody tr td:nth-child(6), 
-#leads tbody tr td:nth-child(7), 
+/*#leads tbody tr td:nth-child(6), 
+*/#leads tbody tr td:nth-child(7), 
 #leads tbody tr td:nth-child(8), 
 #leads tbody tr td:nth-child(9), 
 #leads tbody tr td:nth-child(10), 
@@ -101,6 +116,10 @@
 #leads tbody tr td:nth-child(15),
 #leads tbody tr td:nth-child(16) {
     display: none;
+}
+
+.dataTables_empty {
+    text-align: center !important;
 }
 
 /*leads table styling ends*/

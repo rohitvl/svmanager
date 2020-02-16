@@ -27,6 +27,7 @@ include '../Connection/connection.php';
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="../svleads"><i class="fas fa-user-plus"></i>&nbsp;Lead Enter</a>
                     <a class="dropdown-item" href="../showleads"><i class="fas fa-list"></i>&nbsp;Lead Manage</a>
+                    <a class="dropdown-item" href="../report"><i class="fas fa-edit"></i>&nbsp;Report</a>
                     <a class="dropdown-item" href=""><i class="fas fa-edit"></i>&nbsp;Master</a>
                     <a class="dropdown-item" href="../logout.php"><i class="fas fa-sign-out-alt"></i>&nbsp;Logout</a>
                 </div>
