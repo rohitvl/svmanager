@@ -110,6 +110,13 @@ $('#svd-modal').datetimepicker({
 });
 
 
+//daterange picker for filtering the leads
+$('#sldr').daterangepicker({
+    locale: { format: 'DD/MM/YYYY' }
+});
+
+$('#sldr').val('');
+
 
 //store all the global variables
 let id = null;
@@ -366,46 +373,29 @@ $('#save').on('click', function() {
 
 
 //click pills to filter the table
-$('#sv-pill').click(function() {
-    $('#leads').DataTable().ajax.url(`filters/sv.php`).load();
-});
-
-$('#rsv-pill').click(function() {
-    $('#leads').DataTable().ajax.url(`filters/rsv.php`).load();
-});
-
-$('#arrived-pill').click(function() {
-    $('#leads').DataTable().ajax.url(`filters/arrived.php`).load();
-});
 
 $('#pending-pill').click(function() {
     $('#leads').DataTable().ajax.url(`filters/pending.php`).load();
 });
 
-$('#tagged-pill').click(function() {
-    $('#leads').DataTable().ajax.url(`filters/tagged.php`).load();
-});
-
-$('#av-pill').click(function() {
-    $('#leads').DataTable().ajax.url(`filters/av.php`).load();
-});
-
-$('#closing-pill').click(function() {
-    $('#leads').DataTable().ajax.url(`filters/closing.php`).load();
-});
-
-$('#booked-pill').click(function() {
-    $('#leads').DataTable().ajax.url(`filters/booked.php`).load();
-});
-
-$('#rsvp-pill').click(function() {
-    $('#leads').DataTable().ajax.url(`filters/rsvp.php`).load();
-});
-
-$('#today-pill').click(function() {
-    $('#leads').DataTable().ajax.url(`filters/today.php`).load();
-});
-
 $('#all-pill').click(function() {
     $('#leads').DataTable().ajax.url(`getleads.php`).load();
+});
+
+//filter out the table based on selection
+$('#filter_button').on('click', function() {
+    
+    let filter_date = $('#sldr').val();
+    let filter_status = $('#filterstatus').val();
+
+    if(filter_date === "") {
+        filter_date = 'Today';
+    }
+
+    if(filter_status == "") {
+        alert('Enter Status before filtering');
+    } else {
+        $('#leads').DataTable().ajax.url(`filters/filteredleads.php?date=${filter_date}&&status=${filter_status}`).load();
+    }
+
 });

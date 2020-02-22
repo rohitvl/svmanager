@@ -24,6 +24,8 @@ if(isset($_SESSION['username'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
     <!-- datetimepicker styles -->
     <link rel="stylesheet" href="../Styles/jquery.datetimepicker.min.css">
+    <!-- daterangepicker styles -->
+    <link rel="stylesheet" href="../Styles/daterangepicker.css">
     <!-- Datatables styles -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
     <!-- common styles -->
@@ -58,19 +60,25 @@ if(isset($_SESSION['username'])) {
 
     <div class="container-fluid leads-container p-0">
 
-        <div class="filter-pills">
-            <span>Today's Filter: </span>
-            <span id="sv-pill">SV</span>
-            <span id="rsv-pill">RSV</span>
-            <span id="arrived-pill">Arrived</span>
-            <span id="pending-pill">Pending</span>
-            <span id="tagged-pill">Tagged</span>
-            <span id="av-pill">AV</span>
-            <span id="closing-pill">Closing</span>
-            <span id="booked-pill">Booked</span>
-            <span id="rsvp-pill">RSV Planned</span>
-            <span id="today-pill">Today</span>
-            <span id="all-pill">All</span>
+        <div class="filter-sl text-center">
+            <input type="text" id="sldr" readonly>
+            <select id="filterstatus" size="1" multiple>
+                <option value="" hidden selected>--Select Lead Status--</option>
+                <option value="SV">SV</option>
+                <option value="RSV">RSV</option>
+                <option value="Arrived">Arrived</option>
+                <option value="Tagged">Tagged</option>
+                <option value="AV">AV Room</option>
+                <option value="Closing">Closing Table</option>
+                <option value="Booked">Booked</option>
+                <option value="Planned RSV">Planned RSV</option>
+            </select>
+            <button type="submit" id="filter_button">Filter</button>
+        </div>
+
+        <div class="filter-pills text-center">
+            <span id="pending-pill">Today Pending</span>
+            <span id="all-pill">ALL</span>
         </div>
 
         <table id="leads" class="display">
@@ -260,6 +268,10 @@ if(isset($_SESSION['username'])) {
 
     <!-- datetimepicker script -->
     <script src="../Scripts/jquery.datetimepicker.full.js"></script>
+
+    <!-- daterange picker script -->
+    <script src="../Scripts/moment.min.js"></script>
+    <script src="../Scripts/daterangepicker.js"></script>
 
     <!-- datatables script -->
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>

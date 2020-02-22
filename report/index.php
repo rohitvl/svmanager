@@ -11,8 +11,18 @@ if(isset($_SESSION['username'])) {
     echo "<script type='text/javascript'> window.location.href = '../index.php'; </script>";
 }
 
-$time1 = date('Y-m-d') . " 00:00:00";
-$time2 = date('Y-m-d') . " 23:59:59";
+if(isset($_POST['sub_reportdr'])) {
+
+    $time = $_POST['reportdr'];
+    $time1 = substr($time, 6, 4) . '-' . substr($time, 3, 2) . '-' . substr($time, 0, 2) . ' 00:00:00';
+    $time2 = substr($time, 19, 4) . '-' . substr($time, 16, 2) . '-' . substr($time, 13, 2) . ' 23:59:59';
+
+} else {
+
+    $time1 = date('Y-m-d') . " 00:00:00";
+    $time2 = date('Y-m-d') . " 23:59:59";
+
+}
 
 $sqlOverview = "SELECT lead_svd, sv_status, lead_status, attend_status, sv_done from leads WHERE (lead_svd BETWEEN '$time1' AND '$time2')";
 $result = $conn->query($sqlOverview);
@@ -88,6 +98,8 @@ if ($result->num_rows > 0) {
     
     <!-- datetimepicker styles -->
     <link rel="stylesheet" href="../Styles/jquery.datetimepicker.min.css">
+    <!-- daterangepicker styles -->
+    <link rel="stylesheet" href="../Styles/daterangepicker.css">
     <!-- common styles -->
     <link rel="stylesheet" href="../Styles/primarystyles.css">
     <!-- overview styles -->
@@ -119,7 +131,12 @@ if ($result->num_rows > 0) {
 
     <div class="container-fluid overview-container p-0">
 
-        <h6>Today's Overview</h6>
+        <!-- <h6>Today's Overview</h6> -->
+
+        <form action="" method="POST">
+            <input type="text" id="reportdr" name="reportdr" required readonly autocomplete="off">
+            <input type="submit" name="sub_reportdr">
+        </form>
 
         <div>
             <table>
@@ -166,96 +183,6 @@ if ($result->num_rows > 0) {
             </table>
         </div>
 
-        <!-- <div class="row">
-            <div class="col-8">
-                Total Leads
-            </div>
-            <div class="col-4">
-                <?php echo $total; ?>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-8">
-                Total Arrived
-            </div>
-            <div class="col-4">
-                <?php echo $totalArr; ?>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-8">
-                Pending
-            </div>
-            <div class="col-4">
-                <?php $pending = $total - $totalArr; echo $pending; ?>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-8">
-                SV Done
-            </div>
-            <div class="col-4">
-                <?php echo $svdone; ?>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-8">
-                RSV Done
-            </div>
-            <div class="col-4">
-                <?php echo $rsvdone; ?>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-8">
-                Unattended
-            </div>
-            <div class="col-4">
-                <?php echo $unattended; ?>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-8">
-                Tagged
-            </div>
-            <div class="col-4">
-                <?php echo $tagged; ?>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-8">
-                AV
-            </div>
-            <div class="col-4">
-                <?php echo $av; ?>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-8">
-                Closing
-            </div>
-            <div class="col-4">
-                <?php echo $closing; ?>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-8">
-                Booked
-            </div>
-            <div class="col-4">
-                <?php echo $booked; ?>
-            </div>
-        </div> -->
-
     </div>
 
 
@@ -270,5 +197,13 @@ if ($result->num_rows > 0) {
 
     <!-- datetimepicker script -->
     <script src="../Scripts/jquery.datetimepicker.full.js"></script>
+
+    <!-- daterange picker script -->
+    <script src="../Scripts/moment.min.js"></script>
+    <script src="../Scripts/daterangepicker.js"></script>
+
+    <!-- custom script -->
+    <script src="reportscripts.js"></script>
+
 </body>
 </html>

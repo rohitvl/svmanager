@@ -4,14 +4,24 @@
     overflow-x: hidden;
 }
 
-.overview-container h6 {
+/* .overview-container h6 {
     background-color: transparent;
     color: cadetblue;
-}
+    margin: 0;
+} */
 
+.overview-container input[type="submit"] {
+    background-color: wheat;
+    border: 1px solid cadetblue;
+    color: cadetblue;
+    padding: 2px 4px;
+    font-weight: bolder;
+}
 
 .overview-container table {
     width: 100%;
+    border-collapse:separate;
+    border-spacing:0 15px;
 }
 
 .overview-container table th {

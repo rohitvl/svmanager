@@ -21,13 +21,33 @@
     padding: 4px 8px;
 }
 
-.filter-pills span:not(:first-child) {
+.filter-pills span {
     display: inline-block;
     background-color: cadetblue;
     color: #fff;
     padding: 2px 8px;
     margin: 2px 4px;
     border-radius: 12px;
+}
+
+.filter-sl {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.filter-sl input, .filter-sl select {
+    border-top: 3px inset #eee;
+    border-left: 3px inset #eee;
+    width: 150px;
+    height: 30px;
+}
+
+.filter-sl button {
+    background-color: cadetblue;
+    color: #fff;
+    border: 0;
+    padding: 2px 6px;
 }
 
 /*leads table styling starts*/
