@@ -45,14 +45,25 @@ $('#leads').DataTable( {
         }
     },
 
-    "columnDefs": [{
-        "targets": 5,//index of column starting from 0
-        // "data": "lead_name", this name should exist in your JSON response
-        "render": function (data) {
-            let humanDate = `${data.substring(8, 10)} ${generateMonth[data.substring(5, 7)]} ${data.substring(0, 4)} ${data.substring(11, 16)}`;
-            return humanDate;
+    "columnDefs": [
+        {
+            "targets": 5,//index of column starting from 0
+            // "data": "lead_name", this name should exist in your JSON response
+            "render": function (data) {
+                let humanDate = `${data.substring(8, 10)} ${generateMonth[data.substring(5, 7)]} ${data.substring(0, 4)} ${data.substring(11, 16)}`;
+                return humanDate;
+            }
+        },
+        
+        {
+            "targets": 1,//index of column starting from 0
+            // "data": "lead_name", this name should exist in your JSON response
+            "render": function (data) {
+                let callMaker = `<a href="tel:${data}">${data}</a>`;
+                return callMaker;
+            }
         }
-    }],
+    ],
 
     rowId: function(a) {
         return "lead_" + a.lead_id;
@@ -122,8 +133,9 @@ $('#sldr').val('');
 let id = null;
 
 //on click row do the primary job :)
-$('#leads tbody').on('click', 'tr', function() {
-    let rowID = this.id;
+$('#leads tbody').on('click', 'tr td:first-child', function() {
+    // let rowID = this.id;
+    let rowID = $(this).parent().attr('id');
     id = rowID.slice(5);
 
     //fetching the data

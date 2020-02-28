@@ -18,7 +18,7 @@
 
     if(isset($_POST['email']) && isset($_POST['password'])) {
         $email =$_POST['email'];
-        $password = $_POST['password'];
+		$password = $_POST['password'];
 
         $sql = "SELECT * FROM `access` WHERE `username` = '$email' AND BINARY `password` = '$password'";
         $result = $conn->query($sql);
@@ -27,7 +27,11 @@
 
             while($row = $result->fetch_assoc()){
 
-                $_SESSION['username'] = $row['username'];
+				$_SESSION['username'] = $row['username'];
+				$_SESSION["project"] = $row['project_assigned'];
+				$_SESSION["role"] = $row['role']; 
+                
+                ini_set('session.cookie_lifetime', '30000');
 
                 echo "<script type='text/javascript'> window.location.href = 'showleads/index.php'; </script>";
 

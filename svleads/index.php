@@ -5,6 +5,8 @@ include '../Connection/connection.php';
 // Start the session
 session_start();
 
+$sessionproject = $_SESSION["project"];
+
 
 if(isset($_SESSION['username'])) {
 } else {
@@ -29,12 +31,12 @@ function secure($value) {
 
     $feedback = "";
 
-    $sqlExist = "SELECT * FROM leads WHERE lead_number = '$number'";
+    $sqlExist = "SELECT * FROM leads WHERE lead_number = '$number' AND lead_project='$sessionproject'";
     $result_sqlExist = $conn->query($sqlExist);
 
     if ($result_sqlExist->num_rows == 0) {
 
-        $sql = "INSERT INTO leads (lead_name, lead_number, lead_config, lead_svd, lead_source_by, sv_status) VALUES ('$name', '$number', '$configuration', '$svdt', '$source', '$svs')";
+        $sql = "INSERT INTO leads (lead_name, lead_number, lead_config, lead_svd, lead_source_by, sv_status, lead_project) VALUES ('$name', '$number', '$configuration', '$svdt', '$source', '$svs', '$sessionproject')";
 
         if ($conn->query($sql) === TRUE) {
             $feedback = "Lead Added Successfully";

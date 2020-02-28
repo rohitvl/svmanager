@@ -2,12 +2,17 @@
 
 include '../../Connection/connectionPDO.php';
 
+// Start the session
+session_start();
+
+$sessionproject = $_SESSION["project"];
+
 if(isset($_GET['date']) && isset($_GET['status'])) {
     $date = $_GET['date'];
     $status = $_GET['status'];
     $statusArr = explode(',', $status);
 
-    $where = "";
+    $where = "(lead_project='$sessionproject') AND ";
 
     if (in_array("SV", $statusArr)) {
         $where .= "sv_status = 'SV' OR ";

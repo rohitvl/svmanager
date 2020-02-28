@@ -87,6 +87,10 @@
     width: fit-content; 
 }
 
+#leads tbody tr td a, #leads tbody tr td a:hover {
+    color: black;
+}
+
 #leads tbody tr td:nth-child(1),
 #leads tbody tr td:nth-child(2) {
     text-align: left;
